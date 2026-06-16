@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SplitWise Casero - Control de Gastos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>💸 SplitWise Casero</h1>
+        <p>Divide los gastos de la casa o salidas sin enredos</p>
+    </header>
+
+    <main class="contenedor">
+        <section class="tarjeta">
+            <h2>👤 Integrantes</h2>
+            <div class="formulario-linea">
+                <input type="text" id="nombre-integrante" placeholder="Ej: María, Juan, Pedro...">
+                <button id="btn-agregar-integrante">Agregar</button>
+            </div>
+            <ul id="lista-integrantes" class="lista">
+                </ul>
+        </section>
+
+        <section class="tarjeta">
+            <h2>🛒 Registrar Gasto</h2>
+            <form id="formulario-gasto">
+                <label for="concepto">¿Qué se compró?</label>
+                <input type="text" id="concepto" placeholder="Ej: Pizzas, Helados, Pasajes" required>
+
+                <label for="monto">¿Cuánto costó? ($)</label>
+                <input type="number" id="monto" step="0.01" placeholder="0.00" required>
+
+                <label for="pagador">¿Quién lo pagó?</label>
+                <select id="pagador" required>
+                    <option value="">-- Selecciona quién pagó --</option>
+                    </select>
+
+                <button type="submit" class="btn-principal">Dividir Gasto</button>
+            </form>
+        </section>
+
+        <section class="tarjeta resultados">
+            <h2>📊 Cuentas Claras</h2>
+            <div id="historial-gastos">
+                <h3>Historial de Compras</h3>
+                <ul id="lista-gastos" class="lista"></ul>
+            </div>
+            <hr>
+            <div id="balance-final">
+                <h3>¿Quién le debe a quién?</h3>
+                <div id="division-cuentas" class="alerta-resultado">
+                    Aún no hay gastos registrados.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

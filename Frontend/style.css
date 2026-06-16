@@ -1,0 +1,363 @@
+/* --- CONFIGURACIÓN DE COLORES Y VARIABLES --- */
+:root {
+    --bg-principal: #0f172a;       /* Fondo oscuro profundo (Slate 900) */
+    --bg-tarjeta: #1e293b;         /* Fondo de tarjetas (Slate 800) */
+    --borde-tarjeta: #334155;      /* Color de los bordes sutiles */
+    --texto-brillante: #f8fafc;    /* Texto casi blanco */
+    --texto-mutado: #94a3b8;       /* Texto gris suave para descripciones */
+    
+    /* Acentos de Color */
+    --color-primario: #818cf8;     /* Indigo vibrante */
+    --color-primario-hover: #4f46e5;
+    --color-exito: #10b981;        /* Verde esmeralda (dinero a favor) */
+    --color-error: #f43f5e;        /* Rojo/Rosa brillante (deudas) */
+    --gradiente-premium: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    --bg-detalle: #111827;         /* Gris muy oscuro para el desglose interno */
+}
+
+/* --- ESTILOS GENERALES --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-principal);
+    color: var(--texto-brillante);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- CABECERA DE LA PÁGINA --- */
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    max-width: 600px;
+}
+
+header h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.05em;
+}
+
+header p {
+    color: var(--texto-mutado);
+    font-size: 1.1rem;
+}
+
+/* --- CONTENEDOR PRINCIPAL Y DISEÑO RESPONSIVO --- */
+.contenedor {
+    width: 100%;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+/* En pantallas grandes (computadoras), se divide en dos columnas */
+@media (min-width: 768px) {
+    .contenedor {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    /* La sección de resultados ocupa el ancho completo */
+    .resultados {
+        grid-column: span 2;
+    }
+}
+
+/* --- TARJETAS ESTILO GLASSMORPHISM --- */
+.tarjeta {
+    background-color: var(--bg-tarjeta);
+    border: 1px solid var(--borde-tarjeta);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 
+                0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 
+                0 10px 10px -5px rgba(0, 0, 0, 0.4);
+}
+
+.tarjeta h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--borde-tarjeta);
+    padding-bottom: 0.75rem;
+}
+
+/* --- FORMULARIOS E INPUTS MODERNOS --- */
+.formulario-linea {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    background-color: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--borde-tarjeta);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--texto-brillante);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.2);
+}
+
+label {
+    display: block;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--texto-mutado);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* --- BOTONES PREMIUM --- */
+button {
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+#btn-agregar-integrante {
+    background-color: var(--color-primario);
+    color: white;
+    padding: 0.75rem 1.5rem;
+}
+
+#btn-agregar-integrante:hover {
+    background-color: var(--color-primario-hover);
+    transform: scale(1.02);
+}
+
+.btn-principal {
+    width: 100%;
+    background: var(--gradiente-premium);
+    color: white;
+    padding: 1rem;
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+}
+
+.btn-principal:hover {
+    filter: brightness(1.1);
+    transform: scale(1.01);
+}
+
+/* --- LISTAS DE INTEGRANTES Y COMPRAS --- */
+.lista {
+    list-style: none;
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Estilo tipo "Chips / Etiquetas" para los participantes agregados */
+.lista-integrante-item {
+    background-color: rgba(129, 140, 248, 0.1);
+    border: 1px solid rgba(129, 140, 248, 0.2);
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: aparecer 0.3s ease;
+}
+
+/* Lista de compras en historial */
+#lista-gastos {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.contenedor-gasto {
+    background-color: rgba(15, 23, 42, 0.4);
+    border-left: 4px solid var(--color-primario);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+/* Cabecera del gasto interactivo */
+.gasto-item-header {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.gasto-item-header:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.gasto-info h4 {
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.gasto-info span {
+    color: var(--texto-mutado);
+    font-size: 0.85rem;
+}
+
+.gasto-monto-lado {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.gasto-monto-lado .monto {
+    font-weight: 700;
+}
+
+.flecha-toggle {
+    color: var(--texto-mutado);
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.contenedor-gasto.activo .flecha-toggle {
+    transform: rotate(180deg);
+}
+
+/* Panel Desplegable (Cerrado por defecto) */
+.gasto-detalle {
+    background-color: var(--bg-detalle);
+    border-top: 1px solid var(--borde-tarjeta);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease;
+    padding: 0 1.25rem;
+}
+
+.contenedor-gasto.activo .gasto-detalle {
+    max-height: 300px; /* Suficiente espacio para el desglose */
+    padding: 1rem 1.25rem;
+}
+
+.gasto-detalle p {
+    font-size: 0.9rem;
+    color: var(--texto-mutado);
+    margin-bottom: 0.5rem;
+}
+
+.gasto-detalle ul {
+    list-style: none;
+    margin-top: 0.5rem;
+}
+
+.gasto-detalle li {
+    font-size: 0.9rem;
+    padding: 0.4rem 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+}
+
+.gasto-detalle li:last-child {
+    border-bottom: none;
+}
+
+.gasto-detalle li strong {
+    color: var(--color-error);
+}
+
+.gasto-detalle li.excluido strong {
+    color: var(--texto-mutado);
+    text-decoration: line-through;
+}
+
+/* --- BALANCES Y ALERTAS DE CUENTAS CLARAS --- */
+.resultados h3 {
+    font-size: 1.1rem;
+    color: var(--texto-mutado);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: var(--borde-tarjeta);
+    margin: 2rem 0;
+}
+
+.alerta-resultado {
+    background-color: rgba(15, 23, 42, 0.5);
+    border: 1px dashed var(--borde-tarjeta);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--texto-mutado);
+}
+
+/* Estilos de las transacciones resultantes */
+.transaccion-item {
+    background-color: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.05rem;
+}
+
+.transaccion-item::before {
+    content: "💸";
+    font-size: 1.2rem;
+}
+
+.transaccion-item strong {
+    color: var(--color-exito);
+}
+
+/* --- ANIMACIONES --- */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
